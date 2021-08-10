@@ -41,7 +41,7 @@ const SignInScreen = ({ navigation }: any) => {
       <CustomButton text="Sign In" onPress={() => handleSubmit()} />
       <View style={styles.row}>
         <Text>Don't have an account? </Text>
-        <TouchableOpacity onPress={() => console.log('SignupScreen')}>
+        <TouchableOpacity onPress={() => navigation.replace('SignUp')}>
           <Text style={styles.link}>Signup</Text>
         </TouchableOpacity>
       </View>
