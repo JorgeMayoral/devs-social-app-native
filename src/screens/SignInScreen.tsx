@@ -12,7 +12,7 @@ const SignInScreen = ({ navigation }: any) => {
     const result = await login({ username, password });
 
     if (result) {
-      navigation.navigate('Home');
+      navigation.replace('Home');
     }
   };
 

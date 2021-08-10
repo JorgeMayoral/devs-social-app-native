@@ -14,7 +14,7 @@ const SignUpScreen = ({ navigation }: any) => {
     const result = await register({ username, name, email, password });
 
     if (result) {
-      navigation.navigate('Home');
+      navigation.replace('Home');
     }
   };
 
