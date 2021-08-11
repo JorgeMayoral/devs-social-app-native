@@ -17,7 +17,6 @@ export const fetchUser = async (userId: string): Promise<any> => {
   const url = `${extra?.apiUrl}/v1/user/${userId}`
 
   const response = await axios.get(url)
-  console.log(response)
 
   return response.data
 }
