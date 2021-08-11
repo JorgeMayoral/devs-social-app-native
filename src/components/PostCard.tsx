@@ -14,7 +14,6 @@ const PostCard = ({ postData, callback }: any) => {
   const date = new Date(createdAt);
 
   const handleLike = async () => {
-    console.log(postData);
     await likePost(id);
     await fetchLoggedUser();
   };
