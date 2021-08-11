@@ -10,19 +10,19 @@ const UserCard = ({ user, children }: any) => {
       </View>
       <View style={styles.statistics}>
         <View style={styles.stat}>
-          <Text>{user.posts.length}</Text>
+          <Text style={styles.statNumber}>{user.posts.length}</Text>
           <Text>posts</Text>
         </View>
         <View style={styles.stat}>
-          <Text>{user.likedPosts.length}</Text>
+          <Text style={styles.statNumber}>{user.likedPosts.length}</Text>
           <Text>likes</Text>
         </View>
         <View style={styles.stat}>
-          <Text>{user.followers.length}</Text>
+          <Text style={styles.statNumber}>{user.followers.length}</Text>
           <Text>followers</Text>
         </View>
         <View style={styles.stat}>
-          <Text>{user.following.length}</Text>
+          <Text style={styles.statNumber}>{user.following.length}</Text>
           <Text>following</Text>
         </View>
       </View>
@@ -53,6 +53,11 @@ const styles = StyleSheet.create({
   },
   stat: {
     flexDirection: 'column',
+  },
+  statNumber: {
+    fontSize: 20,
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
 });
 
