@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { likePost } from '../services/postServices';
 import { useUserStore } from '../utils/userStore';
@@ -13,9 +14,20 @@ const PostCard = ({ postData, callback }: any) => {
   const date = new Date(createdAt);
 
   const handleLike = async () => {
+    console.log(postData);
     await likePost(id);
     await fetchLoggedUser();
   };
+
+  useEffect(() => {
+    const loadUserState = async () => {
+      if (loggedUser === undefined) {
+        await fetchLoggedUser();
+      }
+    };
+
+    loadUserState();
+  }, []);
 
   return (
     <View style={styles.card}>
