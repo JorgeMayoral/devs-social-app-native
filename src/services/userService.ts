@@ -20,3 +20,16 @@ export const fetchUser = async (userId: string): Promise<any> => {
 
   return response.data
 }
+
+export const followUser = async (userId: string): Promise<boolean> => {
+  const token = await getToken()
+  const url = `${extra?.apiUrl}/v1/user/${userId}/follow`
+
+  const response = await axios.put(url, null, {headers: {Authorization: `Bearer ${token}`}})
+
+  if (response) {
+    return true
+  }
+
+  return false
+}
