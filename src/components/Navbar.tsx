@@ -23,6 +23,7 @@ const Navbar = ({ navigator, currentRoute }: any) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={currentRoute === 'Explore' ? styles.current : styles.button}
+        onPress={() => navigator.navigate('Explore')}
       >
         <Text>🌐</Text>
       </TouchableOpacity>
@@ -59,7 +60,6 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     paddingHorizontal: 20,
     paddingVertical: 15,
-    borderRadius: 50,
     backgroundColor: '#aaddff',
     elevation: 8,
   },
