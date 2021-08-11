@@ -5,8 +5,8 @@ import { getToken } from '../utils/tokenStorage'
 
 const extra = Constants.manifest?.extra
 
-export const fetchAllPosts = async (): Promise<any[]> => {
-  const url = `${extra?.apiUrl}/v1/post/all`
+export const fetchAllPosts = async (offset: number = 0): Promise<any[]> => {
+  const url = `${extra?.apiUrl}/v1/post/all?offset=${offset}`
 
   const response = await axios.get(url)
 
@@ -24,4 +24,13 @@ export const publishPost = async (data: PostData): Promise<boolean> => {
   }
 
   return false
+}
+
+export const fetchTimeline = async (offset: number = 0): Promise<any[]> => {
+  const token = await getToken()
+  const url = `${extra?.apiUrl}/v1/post/timeline?offset=${offset}`
+
+  const response = await axios.get(url, {headers: {Authorization: `Bearer ${token}`}})
+
+  return response.data
 }
