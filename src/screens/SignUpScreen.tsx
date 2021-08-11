@@ -3,17 +3,20 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import CustomButton from '../components/CustomButton';
 import CustomTextInput from '../components/CustomTextInput';
 import { register } from '../services/authServices';
+import { useUserStore } from '../utils/userStore';
 
 const SignUpScreen = ({ navigation }: any) => {
   const [username, setUsername] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const setUserState = useUserStore((state) => state.fetch);
 
   const handleSubmit = async () => {
     const result = await register({ username, name, email, password });
 
     if (result) {
+      await setUserState();
       navigation.replace('Home');
     }
   };

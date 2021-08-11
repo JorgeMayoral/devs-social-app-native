@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useUserStore } from '../utils/userStore';
 import CustomButton from '../components/CustomButton';
 import CustomTextInput from '../components/CustomTextInput';
 import { login } from '../services/authServices';
@@ -7,11 +8,13 @@ import { login } from '../services/authServices';
 const SignInScreen = ({ navigation }: any) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const setUserState = useUserStore((state) => state.fetch);
 
   const handleSubmit = async () => {
     const result = await login({ username, password });
 
     if (result) {
+      await setUserState();
       navigation.replace('Home');
     }
   };
