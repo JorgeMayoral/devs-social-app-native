@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Navbar from '../components/Navbar';
 import PostCard from '../components/PostCard';
 import { fetchAllPosts } from '../services/postServices';
@@ -12,17 +19,25 @@ const ExploreScreen = ({ navigation }: any) => {
 
   const getPosts = async () => {
     setLoading(true);
+    setEndReached(false);
     const data = await fetchAllPosts(0);
-    setPosts(data);
+
+    if (data.length > 0) {
+      setPosts(data);
+    } else {
+      setEndReached(true);
+    }
     setLoading(false);
   };
 
   const getMorePosts = async () => {
     const data = await fetchAllPosts(currentPostsNumber);
-    setPosts(posts.concat(data));
-    setCurrentPostsNumber((prev) => prev + 10);
-    if (data.length === 0) {
+
+    if (data.length === 0 || data[0] === null) {
       setEndReached(true);
+    } else {
+      setPosts(posts.concat(data));
+      setCurrentPostsNumber((prev) => prev + 10);
     }
   };
 
@@ -36,16 +51,33 @@ const ExploreScreen = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={posts}
-        renderItem={({ item }) => <PostCard postData={item} />}
-        keyExtractor={(item) => item.id}
-        onRefresh={getPosts}
-        refreshing={loading}
-        onEndReached={getMorePosts}
-        onEndReachedThreshold={0.25}
-        ListFooterComponent={MoreLoading}
-      />
+      {posts.length > 0 ? (
+        <FlatList
+          data={posts}
+          renderItem={({ item }) => (
+            <PostCard
+              postData={item}
+              callback={() =>
+                navigation.navigate('User', { userId: item.authorId })
+              }
+            />
+          )}
+          keyExtractor={(item) => item.id}
+          onRefresh={getPosts}
+          refreshing={loading}
+          onEndReached={getMorePosts}
+          onEndReachedThreshold={0.25}
+          ListFooterComponent={MoreLoading}
+          style={styles.postList}
+        />
+      ) : (
+        <View>
+          <Text>There are no posts yet.</Text>
+          <TouchableOpacity onPress={getPosts}>
+            <Text style={styles.link}>Reload</Text>
+          </TouchableOpacity>
+        </View>
+      )}
       <Navbar navigator={navigation} currentRoute="Explore" />
     </View>
   );
@@ -56,6 +88,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  postList: {
+    flex: 1,
+    width: '100%',
+  },
+  link: {
+    color: 'blue',
   },
 });
 
