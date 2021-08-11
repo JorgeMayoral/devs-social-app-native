@@ -12,6 +12,7 @@ const Navbar = ({ navigator, currentRoute }: any) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={currentRoute === 'Profile' ? styles.current : styles.button}
+        onPress={() => navigator.navigate('Profile')}
       >
         <Text>👤</Text>
       </TouchableOpacity>
