@@ -48,3 +48,11 @@ export const likePost = async (postId: string): Promise<boolean> => {
 
   return false
 }
+
+export const fetchUserPosts = async (authorId: string, offset: number = 0): Promise<any[]> => {
+  const url = `${extra?.apiUrl}/v1/post/user/${authorId}?offset=${offset}`
+
+  const response = await axios.get(url)
+
+  return response.data
+}
