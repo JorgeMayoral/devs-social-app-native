@@ -1,20 +1,39 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { likePost } from '../services/postServices';
+import { useUserStore } from '../utils/userStore';
 
-const PostCard = ({ postData }: any) => {
-  const { authorName, authorUsername, body, createdAt, totalLikes } = postData;
+const PostCard = ({ postData, callback }: any) => {
+  const { authorName, authorUsername, body, createdAt, totalLikes, id } =
+    postData;
+
+  const loggedUser = useUserStore((state) => state.user);
+  const fetchLoggedUser = useUserStore((state) => state.fetch);
 
   const date = new Date(createdAt);
 
+  const handleLike = async () => {
+    await likePost(id);
+    await fetchLoggedUser();
+  };
+
   return (
     <View style={styles.card}>
-      <View style={styles.header}>
-        <Text style={styles.name}>{authorName}</Text>
-        <Text style={styles.username}>@{authorUsername}</Text>
-      </View>
+      <TouchableOpacity onPress={callback}>
+        <View style={styles.header}>
+          <Text style={styles.name}>{authorName}</Text>
+          <Text style={styles.username}>@{authorUsername}</Text>
+        </View>
+      </TouchableOpacity>
       <Text>{body}</Text>
       <View style={styles.footer}>
-        <Text>🤍 {totalLikes}</Text>
+        <TouchableOpacity onPress={handleLike}>
+          {loggedUser.likedPosts.includes(id) ? (
+            <Text>❤️ {totalLikes}</Text>
+          ) : (
+            <Text>🤍 {totalLikes}</Text>
+          )}
+        </TouchableOpacity>
         <Text style={styles.date}>{date.toLocaleDateString()}</Text>
       </View>
     </View>

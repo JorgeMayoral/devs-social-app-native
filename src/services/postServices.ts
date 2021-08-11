@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { config } from 'dotenv'
 import Constants from 'expo-constants'
 import { PostData } from '../types'
 import { getToken } from '../utils/tokenStorage'
@@ -33,4 +34,17 @@ export const fetchTimeline = async (offset: number = 0): Promise<any[]> => {
   const response = await axios.get(url, {headers: {Authorization: `Bearer ${token}`}})
 
   return response.data
+}
+
+export const likePost = async (postId: string): Promise<boolean> => {
+  const token = await getToken()
+  const url = `${extra?.apiUrl}/v1/post/${postId}/like`
+
+  const response = await axios.put(url, null, {headers: {Authorization: `Bearer ${token}`}})
+
+  if (response) {
+    return true
+  }
+
+  return false
 }
