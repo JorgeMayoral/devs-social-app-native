@@ -10,7 +10,6 @@ export const login = async (data: SignInData): Promise<boolean> => {
 
   try {
     const response = await axios.post(url, data)
-    console.log(response)
     if (response.status === 200) {
       await saveToken(response.data.token)
       return true
