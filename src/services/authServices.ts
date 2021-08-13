@@ -8,11 +8,15 @@ const extra = Constants.manifest?.extra
 export const login = async (data: SignInData): Promise<boolean> => {
   const url = `${extra?.apiUrl}/v1/user/login`
 
-  const response = await axios.post(url, data)
-
-  if (response.status === 200) {
-    await saveToken(response.data.token)
-    return true
+  try {
+    const response = await axios.post(url, data)
+    console.log(response)
+    if (response.status === 200) {
+      await saveToken(response.data.token)
+      return true
+    }
+  } catch (e) {
+    return false
   }
 
   return false
@@ -21,11 +25,15 @@ export const login = async (data: SignInData): Promise<boolean> => {
 export const register = async (data: SignUpData): Promise<boolean> => {
   const url = `${extra?.apiUrl}/v1/user/register`
 
-  const response = await axios.post(url, data)
+  try {
+    const response = await axios.post(url, data)
 
-  if (response.status === 201) {
-    await saveToken(response.data.token)
-    return true
+    if (response.status === 201) {
+      await saveToken(response.data.token)
+      return true
+    }
+  } catch (e) {
+    return false
   }
 
   return false

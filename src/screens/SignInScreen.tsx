@@ -8,14 +8,18 @@ import { login } from '../services/authServices';
 const SignInScreen = ({ navigation }: any) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const setUserState = useUserStore((state) => state.fetch);
 
   const handleSubmit = async () => {
+    setError('');
     const result = await login({ username, password });
 
     if (result) {
       await setUserState();
       navigation.replace('Home');
+    } else {
+      setError('Wrong username or password');
     }
   };
 
@@ -41,6 +45,7 @@ const SignInScreen = ({ navigation }: any) => {
         secureTextEntry
         style={styles.input}
       />
+      {error ? <Text style={styles.error}>{error}</Text> : null}
       <CustomButton text="Sign In" onPress={() => handleSubmit()} />
       <View style={styles.row}>
         <Text>Don't have an account? </Text>
@@ -83,6 +88,10 @@ const styles = StyleSheet.create({
   link: {
     fontWeight: 'bold',
     color: 'blue',
+  },
+  error: {
+    color: 'red',
+    paddingBottom: 20,
   },
 });
 

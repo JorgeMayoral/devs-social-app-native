@@ -10,14 +10,18 @@ const SignUpScreen = ({ navigation }: any) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const setUserState = useUserStore((state) => state.fetch);
 
   const handleSubmit = async () => {
+    setError('');
     const result = await register({ username, name, email, password });
 
     if (result) {
       await setUserState();
       navigation.replace('Home');
+    } else {
+      setError('Something went wrong, try again later');
     }
   };
 
@@ -65,6 +69,7 @@ const SignUpScreen = ({ navigation }: any) => {
         secureTextEntry
         style={styles.input}
       />
+      {error ? <Text style={styles.error}>{error}</Text> : null}
       <CustomButton text="Sign In" onPress={() => handleSubmit()} />
       <View style={styles.row}>
         <Text>Already have an account? </Text>
@@ -107,6 +112,10 @@ const styles = StyleSheet.create({
   link: {
     fontWeight: 'bold',
     color: 'blue',
+  },
+  error: {
+    color: 'red',
+    paddingBottom: 20,
   },
 });
 
