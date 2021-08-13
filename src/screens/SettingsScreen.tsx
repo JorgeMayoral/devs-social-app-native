@@ -6,7 +6,10 @@ import { removeToken } from '../utils/tokenStorage';
 const SettingsScreen = ({ navigation }: any) => {
   const handleSignOut = async () => {
     await removeToken();
-    navigation.replace('SignIn');
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'SignIn' }],
+    });
   };
 
   return (
