@@ -2,8 +2,8 @@ import 'dotenv/config';
 
 export default {
   expo: {
-    name: 'mobile',
-    slug: 'mobile',
+    name: 'Devs Social App',
+    slug: 'devs-social-app',
     version: '1.0.0',
     orientation: 'portrait',
     icon: './assets/icon.png',
@@ -20,6 +20,8 @@ export default {
       supportsTablet: true,
     },
     android: {
+      package: 'dev.yorch.devssocial',
+      versionCode: 1,
       adaptiveIcon: {
         foregroundImage: './assets/adaptive-icon.png',
         backgroundColor: '#FFFFFF',
