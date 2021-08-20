@@ -1,11 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Navbar from '../components/Navbar';
-import { removeToken } from '../utils/tokenStorage';
+import { useTokenStore } from '../hooks/useTokenStore';
+import { useUserStore } from '../utils/userStore';
 
 const SettingsScreen = ({ navigation }: any) => {
+  const deleteToken = useTokenStore((state) => state.delete);
+  const signoutUser = useUserStore((state) => state.signout);
+
   const handleSignOut = async () => {
-    await removeToken();
+    await deleteToken();
+    signoutUser();
     navigation.reset({
       index: 0,
       routes: [{ name: 'SignIn' }],
