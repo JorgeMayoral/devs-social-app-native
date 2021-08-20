@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useUserStore } from '../utils/userStore';
+import { useUserStore } from '../hooks/useUserStore';
 import Loader from '../components/Loader';
 import Navbar from '../components/Navbar';
 import PostCard from '../components/PostCard';

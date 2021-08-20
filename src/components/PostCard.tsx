@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { likePost } from '../services/postServices';
-import { useUserStore } from '../utils/userStore';
+import { useUserStore } from '../hooks/useUserStore';
 
 const PostCard = ({ postData, callback }: any) => {
   const { authorName, authorUsername, body, createdAt, totalLikes, id } =

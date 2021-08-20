@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import CustomButton from '../components/CustomButton';
 import CustomTextInput from '../components/CustomTextInput';
 import { register } from '../services/authServices';
-import { useUserStore } from '../utils/userStore';
+import { useUserStore } from '../hooks/useUserStore';
 
 const SignUpScreen = ({ navigation }: any) => {
   const [username, setUsername] = useState('');

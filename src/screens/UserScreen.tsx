@@ -14,7 +14,7 @@ import PostCard from '../components/PostCard';
 import UserCard from '../components/UserCard';
 import { fetchUserPosts } from '../services/postServices';
 import { fetchUser, followUser } from '../services/userService';
-import { useUserStore } from '../utils/userStore';
+import { useUserStore } from '../hooks/useUserStore';
 
 const UserScreen = ({ navigation, route }: any) => {
   const { userId } = route.params;

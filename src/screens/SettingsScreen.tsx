@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Navbar from '../components/Navbar';
 import { useTokenStore } from '../hooks/useTokenStore';
-import { useUserStore } from '../utils/userStore';
+import { useUserStore } from '../hooks/useUserStore';
 
 const SettingsScreen = ({ navigation }: any) => {
   const deleteToken = useTokenStore((state) => state.delete);

@@ -7,4 +7,5 @@ export const useUserStore = create<any>(set => ({
     const data = await fetchProfile()
     set({user: data})
   },
+  signout: () => set({user: undefined})
 }))
