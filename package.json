@@ -1,5 +1,6 @@
 {
   "main": "node_modules/expo/AppEntry.js",
+  "version": "1",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -28,6 +29,7 @@
     "@babel/core": "^7.9.0",
     "@types/react": "~16.9.35",
     "@types/react-native": "~0.63.2",
+    "eslint": "7.32.0",
     "typescript": "~4.0.0"
   },
   "private": true
