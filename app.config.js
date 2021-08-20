@@ -22,7 +22,7 @@ export default {
     },
     android: {
       package: 'dev.yorch.devssocial',
-      versionCode: version,
+      versionCode: Number(version),
       adaptiveIcon: {
         foregroundImage: './assets/adaptive-icon.png',
         backgroundColor: '#FFFFFF',
