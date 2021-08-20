@@ -1,10 +1,11 @@
 import 'dotenv/config';
+import { version } from './package.json';
 
 export default {
   expo: {
     name: 'Devs Social App',
     slug: 'devs-social-app',
-    version: '1.0.0',
+    version: version,
     orientation: 'portrait',
     icon: './assets/icon.png',
     splash: {
@@ -21,7 +22,7 @@ export default {
     },
     android: {
       package: 'dev.yorch.devssocial',
-      versionCode: 1,
+      versionCode: version,
       adaptiveIcon: {
         foregroundImage: './assets/adaptive-icon.png',
         backgroundColor: '#FFFFFF',
