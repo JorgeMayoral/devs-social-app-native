@@ -1,8 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
-import { useToken } from './src/hooks/useToken';
-import ExploreScreen from './src/screens/ExploreScreen';
+import React, { useEffect } from 'react';
+import { useTokenStore } from './src/hooks/useTokenStore';
 // Screens
 import HomeScreen from './src/screens/HomeScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
@@ -11,11 +10,17 @@ import SettingsScreen from './src/screens/SettingsScreen';
 import SignInScreen from './src/screens/SignInScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 import UserScreen from './src/screens/UserScreen';
+import ExploreScreen from './src/screens/ExploreScreen';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const { token } = useToken();
+  const loadToken = useTokenStore((state) => state.load);
+  const token = useTokenStore((state) => state.token);
+
+  useEffect(() => {
+    loadToken();
+  }, []);
 
   return (
     <NavigationContainer>
